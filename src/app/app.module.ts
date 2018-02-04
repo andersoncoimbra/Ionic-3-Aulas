@@ -14,6 +14,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { IntroPageModule } from '../pages/intro/intro.module';
 import { HttpModule } from '@angular/http';
 import { MoovieProvider } from '../providers/moovie/moovie';
+import { NovidadesProvider } from '../providers/novidades/novidades';
+import { HttpClient } from '@angular/common/http';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { MoovieProvider } from '../providers/moovie/moovie';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    MoovieProvider
+    MoovieProvider,
+    NovidadesProvider
   ]
 })
 export class AppModule {}

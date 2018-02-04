@@ -7,27 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Feed</ion-title>
+    <ion-title>{{path_img}}</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-card *ngFor="let filme of listaFilmes">
+  <ion-card *ngFor="let news of listanovidades">
 
     <ion-item>
-      <ion-avatar item-start>
-        <img src="assets/images/avatar.png">
-      </ion-avatar>
-      <h2 class="feed_title">{{ filme.original_title }}</h2>
-      <p class="feed_date">{{filme.release_date}}</p>
+      <h2 class="feed_title">{{ news.titulo }}</h2>
+      <p class="feed_date">{{datafomat(news.created_at)}}</p>
     </ion-item>
   
-    <img [src]="'https://image.tmdb.org/t/p/w500'+ filme.backdrop_path">
+    <img [src]="path_img + news.imagem">
   
     <ion-card-content>
-      <p>{{filme.overview}}</p>
+      <p>{{news.descricao}}</p>
     </ion-card-content>
   
     <ion-row>

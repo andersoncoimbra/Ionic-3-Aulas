@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { MoovieProvider } from '../../providers/moovie/moovie';
+import { NovidadesProvider } from '../../providers/novidades/novidades';
 
 /**
  * Generated class for the FeedPage page.
@@ -14,35 +14,42 @@ import { MoovieProvider } from '../../providers/moovie/moovie';
   selector: 'page-feed',
   templateUrl: 'feed.html' ,
   providers:[
-    MoovieProvider
+    NovidadesProvider
   ] 
 })
 export class FeedPage {
 
-  public nome_usuario:string = "Anderson Coimbra"
-  public listaFilmes = new Array<any>()
+  //public nome_usuario:string = "Anderson Coimbra"
+  public listanovidades = new Array<any>();
+  public path_img = null;
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    private movieProvider: MoovieProvider
+    private novidadesProvider: NovidadesProvider,
   ) {
   }
 
   
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FeedPage');
-    this.movieProvider.getPopularMovie().subscribe(
+    console.log('Inicio de caregamento dos dados em pagina');
+    this.novidadesProvider.getNovidade().subscribe(
       data =>{
         const response = (data as any);
         const objeto_retorno = JSON.parse(response._body);
-        this.listaFilmes = objeto_retorno.results;
+        console.log(objeto_retorno.news);
+        this.listanovidades = objeto_retorno.news;
+        this.path_img = objeto_retorno.dbimg
         console.log(objeto_retorno);
       },
       error=>{
         console.log(error)
       }
       )
+    }
+
+    datafomat(date){
+      return date.replace(/(\d{4})\-(\d{2})\-(\d{2}).*/, '$3/$2/$1');
     }
 
 }
